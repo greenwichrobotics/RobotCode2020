@@ -19,12 +19,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
   // distance in inches the robot wants to stay from an object
    // proportional speed constant
-  private static final int kAnalog0 = 0;
   private static final int kAnalog1 = 1;
+  private static final int kAnalog3 = 3;
 
-
-  private final AnalogInput m_analog0 = new AnalogInput(kAnalog0);
   private final AnalogInput m_analog1 = new AnalogInput(kAnalog1);
+  private final AnalogInput m_analog3 = new AnalogInput(kAnalog3);
 
   /**
    * Tells the robot to drive to a set distance (in inches) from an object
@@ -32,7 +31,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("Analog0", m_analog0.getValue());
-    SmartDashboard.putNumber("Analog1", m_analog1.getValue());
+  //  SmartDashboard.putNumber("Analog1", m_analog1.getVoltage()/0.00977);
+  //  SmartDashboard.putNumber("Analog3", m_analog3.getVoltage()/0.00977);
+  double sensorValue = m_analog1.getVoltage();
+    final double scaleFactor = 1/(5./1024.); //scale converting voltage to distance
+    double distance = 5*sensorValue*scaleFactor; //convert the voltage to distance
+    SmartDashboard.putNumber("Analog 1", distance); //write the value to the LabVIEW DriverStation  
   }
 }
