@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.DriveTrainCommand;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -28,7 +29,7 @@ public class RobotContainer {
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem, null, null);
 
   XboxController m_pilotController = new XboxController(Constants.pilotControllerPort);
   XboxController m_copilotController = new XboxController(Constants.copilotControllerPort);
@@ -42,9 +43,10 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_driveTrainSubsystem.setDefaultCommand(
-      new DefaultDrive(
+      new DriveTrainCommand(
         m_driveTrainSubsystem, 
-        () -> m_pilotController.getY()
+        () -> m_pilotController.getTriggerAxis(Hand.kRight),
+        () -> m_pilotController.getX()
       )
     );
   }
@@ -56,7 +58,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    m_pilotController.getTriggerAxis(Hand.kLeft)
   }
 
 
