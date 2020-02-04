@@ -9,15 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-//import edu.wpi.first.wpilibj.XboxController.Axis;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.DriveTrainCommand;
-//import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.DriveTrainSubsystem;
-//import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -27,15 +21,10 @@ import frc.robot.Constants;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem, null, null);
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  XboxController m_pilotController = new XboxController(Constants.pilotControllerPort);
-  XboxController m_copilotController = new XboxController(Constants.copilotControllerPort);
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
   /**
@@ -44,14 +33,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
-    m_driveTrainSubsystem.setDefaultCommand(
-      new DriveTrainCommand(
-        m_driveTrainSubsystem, 
-        () -> m_pilotController.getTriggerAxis(Hand.kRight)-m_pilotController.getTriggerAxis(Hand.kLeft),
-        () -> m_pilotController.getX(Hand.kLeft)
-      )
-    );
   }
 
   /**
@@ -61,7 +42,6 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //m_pilotController.getTriggerAxis(Hand.kLeft)
   }
 
 
@@ -72,6 +52,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_chooser.getSelected();
+    return m_autoCommand;
   }
 }

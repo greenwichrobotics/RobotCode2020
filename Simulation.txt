@@ -1,0 +1,3 @@
+like one which lets you use NetworkTables / Shuffleboard as a Driverstation (halsim_ds_nt), and one that just prints values (halsim_print). They’re all on the simulation/ subproject in allwpilib.
+
+
