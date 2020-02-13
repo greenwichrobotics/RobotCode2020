@@ -10,15 +10,20 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-//import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.DriveTrainCommand;
-//import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-//import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.ShooterSubSystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
-
+import static edu.wpi.first.wpilibj.XboxController.Button;
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -31,6 +36,7 @@ public class RobotContainer {
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
+  private final ShooterSubSystem m_shooter = new ShooterSubSystem();
   // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem, null, null);
 
   XboxController m_pilotController = new XboxController(Constants.pilotControllerPort);
@@ -45,13 +51,17 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    // m_driveTrainSubsystem.setDefaultCommand(
+    //   new DriveTrainCommand(
+    //     m_driveTrainSubsystem, 
+    //     () -> m_pilotController.getTriggerAxis(Hand.kRight)-m_pilotController.getTriggerAxis(Hand.kLeft),
+    //     () -> m_pilotController.getX(Hand.kLeft)
+    //   )
+    //);
     m_driveTrainSubsystem.setDefaultCommand(
-      new DriveTrainCommand(
-        m_driveTrainSubsystem, 
-        () -> m_pilotController.getTriggerAxis(Hand.kRight)-m_pilotController.getTriggerAxis(Hand.kLeft),
-        () -> m_pilotController.getX(Hand.kLeft)
-      )
-    );
+      new RunCommand(() -> m_driveTrainSubsystem.arcadeDrive(
+        m_pilotController.getTriggerAxis(Hand.kRight)-m_pilotController.getTriggerAxis(Hand.kLeft), 
+        m_pilotController.getX(Hand.kLeft)),m_driveTrainSubsystem));
   }
 
   /**
@@ -61,7 +71,11 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //m_pilotController.getTriggerAxis(Hand.kLeft)
+    new JoystickButton(m_copilotController,Button.kA.value)
+    .whenPressed(new InstantCommand(m_shooter::startMotors, m_shooter));
+
+    new JoystickButton(m_copilotController,Button.kA.value)
+    .whenPressed(new InstantCommand(m_shooter::stopMotors, m_shooter));
   }
 
 
