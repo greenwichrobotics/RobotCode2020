@@ -11,16 +11,16 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.DriveTrainCommand;
+//import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.commands.ShooterCommand;
+//import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ShooterSubSystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+//import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+//import edu.wpi.first.wpilibj2.command.WaitCommand;
+//import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import static edu.wpi.first.wpilibj.XboxController.Button;
@@ -74,7 +74,7 @@ public class RobotContainer {
     new JoystickButton(m_copilotController,Button.kA.value)
     .whenPressed(new InstantCommand(m_shooter::startMotors, m_shooter));
 
-    new JoystickButton(m_copilotController,Button.kA.value)
+    new JoystickButton(m_copilotController,Button.kB.value)
     .whenPressed(new InstantCommand(m_shooter::stopMotors, m_shooter));
   }
 

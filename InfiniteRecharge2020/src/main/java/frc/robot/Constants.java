@@ -26,9 +26,9 @@ public final class Constants {
     //3
         public static int climber = 3;
     //4
-        public static int shooterHigh = 4;
+        public static int shooterLow = 4;
     //5
-        public static int shooterLow = 5;
+        public static int shooterHigh = 5;
     //6
     //7
     //8

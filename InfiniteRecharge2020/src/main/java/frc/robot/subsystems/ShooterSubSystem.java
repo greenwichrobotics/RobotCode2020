@@ -12,14 +12,14 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.PWMSparkMax;
 import frc.robot.*;
 import edu.wpi.first.wpilibj.shuffleboard.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ShooterSubSystem extends SubsystemBase {
   PWMSparkMax top_Shooter;
   PWMSparkMax bottom_Shooter;
   //Double topMotorSpeed = 0.0;
   //Double bottomMotorSpeed = 0.0;
-  ShuffleboardTab tab = Shuffleboard.getTab("Main");
+  ShuffleboardTab tab = Shuffleboard.getTab("Primary");
   NetworkTableEntry topMotorSpeed = tab.add("Top Shooter", 0).getEntry();
   NetworkTableEntry bottomMotorSpeed = tab.add("Bottom Shooter", 0).getEntry();
   /**
@@ -40,12 +40,16 @@ public class ShooterSubSystem extends SubsystemBase {
   }
 
   public void startMotors(){
-    SmartDashboard.putNumber("Top Slider", topMotorSpeed.getDouble(0));
-    SmartDashboard.putNumber("Bottom Slider", bottomMotorSpeed.getDouble(0));
+    top_Shooter.set(0.2);
+    bottom_Shooter.set(-0.2);
+    //SmartDashboard.putNumber("Top Motor", topMotorSpeed.getDouble(0));
+    //SmartDashboard.putNumber("Bottom Motor", bottomMotorSpeed.getDouble(0));
   }
 
   public void stopMotors(){
-    SmartDashboard.putNumber("Top Slider", 0);
-    SmartDashboard.putNumber("Bottom Slider", 0);
+    top_Shooter.set(0);
+    bottom_Shooter.set(0);
+    //SmartDashboard.putNumber("Top Motor", 0);
+    //SmartDashboard.putNumber("Bottom Motor", 0);
   }
 }
