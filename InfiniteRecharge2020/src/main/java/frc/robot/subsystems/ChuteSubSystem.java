@@ -7,19 +7,19 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ClimberSubSystem extends SubsystemBase {
-  Spark climberMotor;
+public class ChuteSubSystem extends SubsystemBase {
+  VictorSP chuteMotor;
   double motorSpeed = 0.1;
-  
   /**
-   * Creates a new ClimberSubSystem.
+   * Creates a new ChuteSubSystem.
    */
-  public ClimberSubSystem() {
-    climberMotor = new Spark(Constants.climber);
+  public ChuteSubSystem() {
+    chuteMotor = new VictorSP(Constants.chute);
+
   }
 
   @Override
@@ -28,14 +28,14 @@ public class ClimberSubSystem extends SubsystemBase {
   }
 
   public void upMotor(){
-    climberMotor.set(motorSpeed);
+    chuteMotor.set(motorSpeed);
   }
 
   public void downMotor(){
-    climberMotor.set(motorSpeed * -1.0);
+    chuteMotor.set(motorSpeed * -1);
   }
 
   public void stopMotor(){
-    climberMotor.set(0.0);
+    chuteMotor.set(0.0);
   }
 }

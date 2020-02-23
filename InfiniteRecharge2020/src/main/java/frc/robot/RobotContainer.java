@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 //import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ShooterSubSystem;
+import frc.robot.subsystems.ChuteSubSystem;
 import frc.robot.subsystems.ClimberSubSystem;
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.ConditionalCommand;
@@ -38,6 +40,8 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
   private final ShooterSubSystem m_shooter = new ShooterSubSystem();
   private final ClimberSubSystem m_climber = new ClimberSubSystem();
+  private final IntakeSubSystem m_intake = new IntakeSubSystem();
+  private final ChuteSubSystem m_chute = new ChuteSubSystem();
   // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem, null, null);
 
   XboxController m_pilotController = new XboxController(Constants.pilotControllerPort);
@@ -72,22 +76,41 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // new JoystickButton(m_copilotController,Button.kA.value)
-    // .whenPressed(new InstantCommand(m_shooter::startMotors, m_shooter));
+    //Shooter -------(Co-Pilot Hold A) ------------------------------------
+    new JoystickButton(m_copilotController,Button.kA.value)
+    .whenHeld(new InstantCommand(m_shooter::startMotors, m_shooter));
+    new JoystickButton(m_copilotController,Button.kA.value)
+    .whenReleased(new InstantCommand(m_shooter::stopMotors, m_shooter));
 
     // new JoystickButton(m_copilotController,Button.kB.value)
-    // .whenPressed(new InstantCommand(m_shooter::stopMotors, m_shooter));
+    // .whenHeld(new InstantCommand(m_shooter::stopMotors, m_shooter));
 
-    //Climber ----------------------------------------------------
+    //Climber ----------(Pilot Hold A climb, Hold B decend )---------------
     //Raise climber
     new JoystickButton(m_pilotController,Button.kA.value)
-    .whenPressed(new InstantCommand(m_climber::upMotor, m_climber));
+    .whenHeld(new InstantCommand(m_climber::upMotor, m_climber));
+    new JoystickButton(m_pilotController,Button.kA.value)
+    .whenReleased(new InstantCommand(m_climber::stopMotor, m_climber));
     //Lower climber
     new JoystickButton(m_pilotController,Button.kB.value)
-    .whenPressed(new InstantCommand(m_climber::downMotor, m_climber));
+    .whenHeld(new InstantCommand(m_climber::downMotor, m_climber));
+    new JoystickButton(m_pilotController,Button.kB.value)
+    .whenReleased(new InstantCommand(m_climber::stopMotor, m_climber));
     //Stop climber
+    // new JoystickButton(m_pilotController,Button.kX.value)
+    // .whenPressed(new InstantCommand(m_climber::stopMotor, m_climber));
+
+    //Intake --------------(Pilot Hold X) ---------------------------
     new JoystickButton(m_pilotController,Button.kX.value)
-    .whenPressed(new InstantCommand(m_climber::stopMotor, m_climber));
+    .whenHeld(new InstantCommand(m_intake::inMotor, m_intake));
+    new JoystickButton(m_pilotController,Button.kX.value)
+    .whenReleased(new InstantCommand(m_intake::stopMotor, m_intake));
+
+    //Chute --------------(Pilot Hold Y) ---------------------------
+    new JoystickButton(m_pilotController,Button.kY.value)
+    .whenHeld(new InstantCommand(m_chute::upMotor, m_chute));
+    new JoystickButton(m_pilotController,Button.kY.value)
+    .whenReleased(new InstantCommand(m_chute::stopMotor, m_chute));
   }
 
 

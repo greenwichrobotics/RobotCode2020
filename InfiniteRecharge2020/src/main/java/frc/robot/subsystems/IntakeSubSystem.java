@@ -7,19 +7,19 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ClimberSubSystem extends SubsystemBase {
-  Spark climberMotor;
+public class IntakeSubSystem extends SubsystemBase {
+  VictorSP intakeMotor;
   double motorSpeed = 0.1;
-  
   /**
-   * Creates a new ClimberSubSystem.
+   * Creates a new IntakeSubSystem.
    */
-  public ClimberSubSystem() {
-    climberMotor = new Spark(Constants.climber);
+  public IntakeSubSystem() {
+    intakeMotor = new VictorSP(Constants.intake);
+
   }
 
   @Override
@@ -27,15 +27,15 @@ public class ClimberSubSystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void upMotor(){
-    climberMotor.set(motorSpeed);
+  public void inMotor(){
+    intakeMotor.set(motorSpeed);
   }
 
-  public void downMotor(){
-    climberMotor.set(motorSpeed * -1.0);
+  public void outMotor(){
+    intakeMotor.set(motorSpeed * -1.0);
   }
 
   public void stopMotor(){
-    climberMotor.set(0.0);
+    intakeMotor.set(0.0);
   }
 }

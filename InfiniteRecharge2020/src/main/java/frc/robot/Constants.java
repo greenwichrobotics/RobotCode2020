@@ -18,7 +18,7 @@ package frc.robot;
 public final class Constants {
     //PWM
     //0
-    public static int driveLeft = 0;
+        public static int driveLeft = 0;
     //1
         public static int driveRight = 1;
     //2
@@ -26,10 +26,11 @@ public final class Constants {
     //3
         public static int climber = 3;
     //4
-        public static int shooterLow = 4;
+        public static int chute = 4;
     //5
-        public static int shooterHigh = 5;
+        public static int shooterLow = 5;
     //6
+        public static int shooterHigh = 6;
     //7
     //8
     //9
