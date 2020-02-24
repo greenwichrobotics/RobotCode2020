@@ -13,7 +13,7 @@ import frc.robot.Constants;
 
 public class ClimberSubSystem extends SubsystemBase {
   Spark climberMotor;
-  double motorSpeed = 0.1;
+  double motorSpeed = 0.3;
   
   /**
    * Creates a new ClimberSubSystem.
