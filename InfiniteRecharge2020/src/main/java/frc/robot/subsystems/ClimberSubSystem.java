@@ -12,14 +12,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubSystem extends SubsystemBase {
-  Spark climberMotor;
-  double motorSpeed = 0.3;
+  Spark climberMotorX1;
+  Spark climberMotorX2;
+  double motorSpeed = 1.0;
+  double reducer = 0.972;
   
   /**
    * Creates a new ClimberSubSystem.
    */
   public ClimberSubSystem() {
-    climberMotor = new Spark(Constants.climber);
+    climberMotorX1 = new Spark(Constants.climberX1);
+    climberMotorX2 = new Spark(Constants.climberX2);
   }
 
   @Override
@@ -28,14 +31,17 @@ public class ClimberSubSystem extends SubsystemBase {
   }
 
   public void upMotor(){
-    climberMotor.set(motorSpeed);
+    climberMotorX1.set(motorSpeed);
+    climberMotorX2.set(motorSpeed*reducer);
   }
 
   public void downMotor(){
-    climberMotor.set(motorSpeed * -1.0);
+    climberMotorX1.set(motorSpeed * -1.0);
+    climberMotorX2.set(motorSpeed  * reducer * -1.0);
   }
 
   public void stopMotor(){
-    climberMotor.set(0.0);
+    climberMotorX1.set(0.0);
+    climberMotorX2.set(0.0);
   }
 }

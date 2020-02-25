@@ -24,14 +24,15 @@ public final class Constants {
     //2
         public static int intake = 2;
     //3
-        public static int climber = 3;
+        public static int chute = 3;
     //4
-        public static int chute = 4;
+        public static int climberX1 = 4; //faster
     //5
-        public static int shooterLow = 5;
+        public static int climberX2 = 5;
     //6
-        public static int shooterHigh = 6;
+        public static int shooterLow = 6;
     //7
+        public static int shooterHigh = 7;
     //8
     //9
 
