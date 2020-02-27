@@ -13,7 +13,7 @@ import frc.robot.Constants;
 
 public class IntakeSubSystem extends SubsystemBase {
   VictorSP intakeMotor;
-  double motorSpeed = 0.1;
+  double motorSpeed = -0.3;
   /**
    * Creates a new IntakeSubSystem.
    */

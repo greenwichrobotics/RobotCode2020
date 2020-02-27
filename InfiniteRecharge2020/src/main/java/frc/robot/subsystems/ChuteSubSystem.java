@@ -13,7 +13,7 @@ import frc.robot.Constants;
 
 public class ChuteSubSystem extends SubsystemBase {
   VictorSP chuteMotor;
-  double motorSpeed = 0.1;
+  double motorSpeed = -0.3;
   /**
    * Creates a new ChuteSubSystem.
    */
