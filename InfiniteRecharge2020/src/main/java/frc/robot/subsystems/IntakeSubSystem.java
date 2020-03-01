@@ -7,13 +7,18 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubSystem extends SubsystemBase {
   VictorSP intakeMotor;
-  double motorSpeed = -0.3;
+  ShuffleboardTab tab = Shuffleboard.getTab("Intake");
+  NetworkTableEntry intakeMotorSpeed = tab.add("Intake", 0).getEntry();
+  //double motorSpeed = -0.3;
   /**
    * Creates a new IntakeSubSystem.
    */
@@ -28,11 +33,11 @@ public class IntakeSubSystem extends SubsystemBase {
   }
 
   public void inMotor(){
-    intakeMotor.set(motorSpeed);
+    intakeMotor.set(intakeMotorSpeed.getDouble(0));
   }
 
   public void outMotor(){
-    intakeMotor.set(motorSpeed * -1.0);
+    intakeMotor.set(intakeMotorSpeed.getDouble(0) * -1.0);
   }
 
   public void stopMotor(){

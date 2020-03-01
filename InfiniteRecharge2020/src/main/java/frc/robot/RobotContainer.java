@@ -45,7 +45,7 @@ public class RobotContainer {
   // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem, null, null);
 
   XboxController m_pilotController = new XboxController(Constants.pilotControllerPort);
-  XboxController m_copilotController = new XboxController(Constants.copilotControllerPort);
+//  XboxController m_copilotController = new XboxController(Constants.copilotControllerPort);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
@@ -77,7 +77,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Shooter -------(Co-Pilot Hold A) ------------------------------------
-    new JoystickButton(m_copilotController,Button.kA.value)
+    new JoystickButton(m_pilotController,Button.kBumperRight.value)
     .whenPressed(new InstantCommand(m_shooter::startMotors, m_shooter))
     .whenReleased(new InstantCommand(m_shooter::stopMotors, m_shooter));
 

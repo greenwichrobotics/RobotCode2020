@@ -7,15 +7,21 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubSystem extends SubsystemBase {
   Spark climberMotorX1;
   Spark climberMotorX2;
-  double motorSpeed = 1.0;
-  double reducer = 0.972;
+  ShuffleboardTab tab = Shuffleboard.getTab("Climber");
+  NetworkTableEntry x1MotorSpeed = tab.add("X1 Motor", 0).getEntry();
+  NetworkTableEntry x2MotorSpeed = tab.add("X2 Motor", 0).getEntry();
+  //double motorSpeed = 1.0;
+ // double reducer = 0.972;
   
   /**
    * Creates a new ClimberSubSystem.
@@ -31,13 +37,13 @@ public class ClimberSubSystem extends SubsystemBase {
   }
 
   public void upMotor(){
-    climberMotorX1.set(motorSpeed);
-    climberMotorX2.set(motorSpeed*reducer);
+    climberMotorX1.set(x1MotorSpeed.getDouble(0));
+    climberMotorX2.set(x2MotorSpeed.getDouble(0));
   }
 
   public void downMotor(){
-    climberMotorX1.set(motorSpeed * -1.0);
-    climberMotorX2.set(motorSpeed  * reducer * -1.0);
+    climberMotorX1.set(x1MotorSpeed.getDouble(0) * -1.0);
+    climberMotorX2.set(x2MotorSpeed.getDouble(0) * -1.0);
   }
 
   public void stopMotor(){

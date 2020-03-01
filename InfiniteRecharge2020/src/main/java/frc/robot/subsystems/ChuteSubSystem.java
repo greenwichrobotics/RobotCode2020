@@ -7,18 +7,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+//import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ChuteSubSystem extends SubsystemBase {
-  VictorSP chuteMotor;
-  double motorSpeed = -0.3;
+  Spark chuteMotor;
+  ShuffleboardTab tab = Shuffleboard.getTab("Chute");
+  NetworkTableEntry chuteMotorSpeed = tab.add("Chute", 0).getEntry();
+  //double motorSpeed = -0.3;
   /**
    * Creates a new ChuteSubSystem.
    */
   public ChuteSubSystem() {
-    chuteMotor = new VictorSP(Constants.chute);
+    chuteMotor = new Spark(Constants.chute);
 
   }
 
@@ -28,11 +34,11 @@ public class ChuteSubSystem extends SubsystemBase {
   }
 
   public void upMotor(){
-    chuteMotor.set(motorSpeed);
+    chuteMotor.set(chuteMotorSpeed.getDouble(0));
   }
 
   public void downMotor(){
-    chuteMotor.set(motorSpeed * -1);
+    chuteMotor.set(chuteMotorSpeed.getDouble(0) * -1);
   }
 
   public void stopMotor(){
