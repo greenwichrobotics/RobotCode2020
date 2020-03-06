@@ -16,6 +16,7 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 //import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ShooterSubSystem;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ChuteSubSystem;
 import frc.robot.subsystems.ClimberSubSystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -45,7 +46,7 @@ public class RobotContainer {
   // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem, null, null);
 
   XboxController m_pilotController = new XboxController(Constants.pilotControllerPort);
-//  XboxController m_copilotController = new XboxController(Constants.copilotControllerPort);
+  XboxController m_copilotController = new XboxController(Constants.copilotControllerPort);
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
@@ -55,6 +56,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    //m_chooser.addOption("Drive Off Line", object);
 
     // m_driveTrainSubsystem.setDefaultCommand(
     //   new DriveTrainCommand(
@@ -106,6 +108,14 @@ public class RobotContainer {
     new JoystickButton(m_pilotController,Button.kY.value)
     .whenPressed(new InstantCommand(m_chute::upMotor, m_chute))
     .whenReleased(new InstantCommand(m_chute::stopMotor, m_chute));
+
+    
+    ///-----------------------Co-Pilot ------------------------------
+    //Shooter -------(Co-Pilot Hold A) ------------------------------------
+    //While holding A the shooter motors should start and after a delay the chute should run
+    new JoystickButton(m_copilotController,Button.kBumperRight.value)
+    .whileHeld(new ShooterCommand(m_shooter, m_chute));
+    ///-----------------------End Co-Pilot --------------------------
   }
 
 
