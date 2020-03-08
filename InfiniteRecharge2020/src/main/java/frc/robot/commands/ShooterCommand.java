@@ -15,7 +15,7 @@ import frc.robot.subsystems.ShooterSubSystem;
 public class ShooterCommand extends CommandBase {
   private final ShooterSubSystem shooterSubSystem;
   private final ChuteSubSystem chuteSubSystem;
-  private double timerDelay = 5.0;
+  private double timerDelay = 3.0;
   private Timer timer = new Timer();
   /**
    * Creates a new ShooterCommand.

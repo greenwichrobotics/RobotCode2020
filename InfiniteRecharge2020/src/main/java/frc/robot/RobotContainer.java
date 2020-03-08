@@ -11,20 +11,16 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
-//import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ShooterSubSystem;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ChuteSubSystem;
 import frc.robot.subsystems.ClimberSubSystem;
 import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-//import edu.wpi.first.wpilibj2.command.WaitCommand;
-//import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import static edu.wpi.first.wpilibj.XboxController.Button;
 /**
@@ -113,8 +109,12 @@ public class RobotContainer {
     ///-----------------------Co-Pilot ------------------------------
     //Shooter -------(Co-Pilot Hold A) ------------------------------------
     //While holding A the shooter motors should start and after a delay the chute should run
-    new JoystickButton(m_copilotController,Button.kBumperRight.value)
+    new JoystickButton(m_copilotController,Button.kA.value)
     .whileHeld(new ShooterCommand(m_shooter, m_chute));
+
+    //While holding B the shooter motors should start and after a delay the chute should run
+    new JoystickButton(m_copilotController,Button.kB.value)
+    .whileHeld(new IntakeCommand(m_chute, m_intake));
     ///-----------------------End Co-Pilot --------------------------
   }
 
